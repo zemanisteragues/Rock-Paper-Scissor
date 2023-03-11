@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissor</title>
+</head>
+<body>
+    <div>
+        <h1>Welcome to the game!</h1>
+        <hr>
+        <!-- this shows us the score of the user! -->
+        <h2>Score: <span id="score"></span></h2>
+    </div>
+    <div>
+        <h2 >Your choice: <span id="user-choice"></span></h2>
+    </div>
+    <!-- this shows the computers choice! -->
+    <div>
+        <h2>Computers Choice: <span id="computers-choice"></span> </h2>
+    </div>
+
+    <div>
+        <button id="Rock">Rock</button>
+        <button id="Paper">Paper</button>
+        <button id="Scissor">Scissor</button>
+    </div>
+
+    <script>
+        let userChoice;
+        const displayResult = document.getElementById('score');
+        const displayComputer = document.getElementById('computers-choice');
+        const displayUser = document.getElementById('user-choice');
+        const buttonSelector = document.querySelectorAll('button');
+
+        let computerChoice;
+        let currentResult = 0;
+        buttonSelector.forEach(buttonSelector => buttonSelector.addEventListener('click' , (tmp)=>{
+
+            userChoice = tmp.target.id;
+            displayUser.innerHTML = userChoice;
+            const num = RandomChoice();
+
+            if(num == 0) {
+                computerChoice = 'Rock';
+            }
+            if(num == 1){
+                computerChoice = 'Paper';
+            }
+            if(num == 2) {
+                computerChoice = 'Scissor';
+            }
+
+            displayComputer.innerHTML = computerChoice;
+            let res = checkResult(computerChoice , userChoice);
+            
+            if(res == true){
+                currentResult++;
+            }
+            displayResult.innerHTML = currentResult;
+        }));
+        //  is the user Wins the game then we'll return a true value else false will be returned
+        function checkResult(computer , user ) {
+            if(computer == 'Rock' && user == 'Scissor' || user == 'Rock' && computer == 'Paper' || computer == 'Scissor' || computer == 'Scissor' && user == 'Paper' ) {
+                return false;
+            }
+            else if(computer == user) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        function RandomChoice() {
+            let random = Math.floor(Math.random() * 3);
+
+            return random;
+        }
+
+    </script>
+</body>
+</html>
